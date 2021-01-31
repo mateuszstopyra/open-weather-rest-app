@@ -16,7 +16,7 @@ public class WeatherController {
 
     private final ModelMapper modelMapper;
     private final WeatherService weatherService;
-    
+
 
     public WeatherDto convertToDto(Weather weather){
         WeatherDto weatherDto = modelMapper.map(weather,WeatherDto.class);
