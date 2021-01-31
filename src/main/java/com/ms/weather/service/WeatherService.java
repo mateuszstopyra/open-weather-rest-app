@@ -1,7 +1,9 @@
 package com.ms.weather.service;
 
+import com.ms.weather.dto.WeatherDto;
 import com.ms.weather.model.Weather;
 import com.ms.weather.repository.WeatherRepository;
+import com.ms.weather.webclient.WeatherClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class WeatherService {
 
     private final WeatherRepository weatherRepository;
+    private final WeatherClient weatherClient;
 
     public Weather save(Weather weather){
         weather.setLastUpdateDate(LocalDateTime.now());
@@ -42,6 +45,10 @@ public class WeatherService {
         }else{
             return save(weather);
         }
+    }
+
+    public WeatherDto getWeatherForCity(String city){
+        return weatherClient.getWeatherForCity(city);
     }
 
 
