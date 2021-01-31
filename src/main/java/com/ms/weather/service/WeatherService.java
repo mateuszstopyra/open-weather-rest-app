@@ -5,6 +5,7 @@ import com.ms.weather.model.Weather;
 import com.ms.weather.repository.WeatherRepository;
 import com.ms.weather.webclient.WeatherClient;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class WeatherService {
 
     private final WeatherRepository weatherRepository;
@@ -36,6 +38,7 @@ public class WeatherService {
             weatherToChange.setCountry(weather.getCountry());
             weatherToChange.setSunrise(weather.getSunrise());
             weatherToChange.setSunset(weather.getSunset());
+            weatherToChange.setDescription(weather.getDescription());
             weatherToChange.setName(weather.getName());
             weatherToChange.setFeelsLike(weather.getFeelsLike());
             weatherToChange.setTempMin(weather.getTempMin());

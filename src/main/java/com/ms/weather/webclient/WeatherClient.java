@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.TimeZone;
 
 @Component
@@ -27,7 +28,7 @@ public class WeatherClient {
                 .pressure(openWeatherCurrentDto.getMain().getPressure())
                 .country(openWeatherCurrentDto.getSys().getCountry())
                 .temperature(openWeatherCurrentDto.getMain().getTemp())
-//                .description(openWeatherWeatherDto.getWeather().getDescription().get(0))
+                .description(openWeatherCurrentDto.getWeather()[0].getDescription())
                 .feelsLike(openWeatherCurrentDto.getMain().getFeels_like())
                 .tempMin(openWeatherCurrentDto.getMain().getTemp_min())
                 .tempMax(openWeatherCurrentDto.getMain().getTemp_max())
