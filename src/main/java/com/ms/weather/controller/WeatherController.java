@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,6 +18,14 @@ public class WeatherController {
     private final ModelMapper modelMapper;
     private final WeatherService weatherService;
 
+    @GetMapping(value = "/{city}")
+    public WeatherDto getWeather(@PathVariable("city") String city){
+        WeatherDto weatherDto = weatherService.getWeatherForCity(city);
+        Weather weather = convertToEntity(weatherDto);
+        weather.setCity(city);
+        weather = weatherService.save(weather);
+        return convertToDto(weather);
+    }
 
     public WeatherDto convertToDto(Weather weather){
         WeatherDto weatherDto = modelMapper.map(weather,WeatherDto.class);
